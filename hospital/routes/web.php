@@ -41,6 +41,6 @@ Route::view('/rumahsakit', 'rumahsakit')->name('rumahsakit.index');
 Route::get('/rumahsakit', [RumahSakitController::class, 'index'])->name('rumahsakit.index');
 Route::post('/rumahsakit', [RumahSakitController::class, 'store'])->name('rumahsakit.store');
 Route::get('/rumahsakit/{rumahsakit}/edit', [RumahSakitController::class, 'edit'])->name('rumahsakit.edit');
-Route::delete('/rumahsakit/{rumahsakit}', [RumahSakitController::class, 'destroy'])->name('rumahsakit.destroy');
+Route::delete('/rumahsakit/{id}', [RumahSakitController::class, 'destroy'])->name('rumahsakit.destroy');
 
 Route::resource('pasien', 'PasienController');  
