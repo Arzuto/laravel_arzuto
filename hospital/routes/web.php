@@ -27,10 +27,8 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/login', function (Request $request) {
-    // Memvalidasi data form login
     $credentials = $request->only('username', 'password');
 
-    // Melakukan autentikasi
     if (Auth::attempt($credentials)) {
         return redirect()->route('rumahsakit.index');
     } else {
@@ -43,4 +41,8 @@ Route::post('/rumahsakit', [RumahSakitController::class, 'store'])->name('rumahs
 Route::get('/rumahsakit/{rumahsakit}/edit', [RumahSakitController::class, 'edit'])->name('rumahsakit.edit');
 Route::delete('/rumahsakit/{id}', [RumahSakitController::class, 'destroy'])->name('rumahsakit.destroy');
 
-Route::resource('pasien', 'PasienController');  
+Route::view('/pasien', 'pasien')->name('pasien.index');
+Route::get('/pasien', [PasienController::class, 'index'])->name('pasien.index');
+Route::post('/pasien', [PasienController::class, 'store'])->name('pasien.store');
+Route::get('/pasien/{pasien}/edit', [PasienController::class, 'edit'])->name('pasien.edit');
+Route::delete('/pasien/{id}', [PasienController::class, 'destroy'])->name('pasien.destroy');

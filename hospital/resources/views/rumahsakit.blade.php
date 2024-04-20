@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Data Rumah Sakit</title>
-    <!-- Tambahkan link CSS Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -44,7 +43,7 @@
             </thead>
             <tbody>
                 @foreach($rumahsakit as $rumahsakit)
-                <tr id="row-{{ $rumahsakit->id }}"> <!-- Tambahkan ID unik untuk setiap baris -->
+                <tr id="row-{{ $rumahsakit->id }}">
                     <td>{{ $rumahsakit->nama }}</td>
                     <td>{{ $rumahsakit->alamat }}</td>
                     <td>{{ $rumahsakit->email }}</td>
@@ -61,6 +60,7 @@
                 @endforeach
             </tbody>
         </table>
+        <a href="{{ route('pasien.index') }}" class="btn btn-primary">Ke Halaman Pasien</a>
     </div>
 </body>
 </html>
@@ -79,10 +79,8 @@
              url: '{{ route("rumahsakit.store") }}',
              data: formData,
              success: function(response) {
-                console.log(response); // Tambahkan ini untuk memeriksa respons di konsol browser
+                console.log(response);
                 alert(response.message);
- 
-                // Update tabel dengan data yang baru
                 $('#dataRumahSakit tbody').append(
                     '<tr>' +
                         '<td>' + response.rumahSakit.nama + '</td>' +
@@ -107,28 +105,25 @@
           });
        });
 
-       // Event listener untuk tombol hapus
-       $(document).on('click', '.btn-hapus', function(e) { // Menggunakan click event
-    e.preventDefault(); // Menghentikan perilaku bawaan tombol
+    $(document).on('click', '.btn-hapus', function(e) {
+        e.preventDefault();
 
-    var form = $(this).closest('form');
+        var form = $(this).closest('form');
 
-    $.ajax({
-        type: 'DELETE',
-        url: form.attr('action'),
-        data: form.serialize(),
-        success: function(response) {
-            console.log(response); // Tambahkan ini untuk memeriksa respons di konsol browser
-            alert(response.message);
-
-            // Hapus baris dari tabel
-            form.closest('tr').remove(); // Menghapus baris tabel yang sesuai dengan formulir yang dihapus
-        },
-        error: function(xhr, status, error) {
-            console.error(error);
-            alert('Terjadi kesalahan. Silakan coba lagi.');
-        }
+        $.ajax({
+            type: 'DELETE',
+            url: form.attr('action'),
+            data: form.serialize(),
+            success: function(response) {
+                console.log(response);
+                alert(response.message);
+                form.closest('tr').remove();
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert('Terjadi kesalahan. Silakan coba lagi.');
+            }
+        });
     });
 });
-    });
 </script>

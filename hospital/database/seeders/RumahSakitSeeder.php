@@ -14,7 +14,6 @@ class RumahSakitSeeder extends Seeder
      */
     public function run()
     {
-        // Data dummy untuk dimasukkan ke dalam tabel rumah_sakit
         $rumahSakitData = [
             [
                 'nama' => 'RS Pertama',
@@ -28,10 +27,8 @@ class RumahSakitSeeder extends Seeder
                 'email' => 'rs_kedua@example.com',
                 'telepon' => '087654321'
             ],
-            // Tambahkan data rumah sakit lainnya di sini sesuai kebutuhan
         ];
 
-        // Masukkan data ke dalam tabel rumah_sakit
         foreach ($rumahSakitData as $data) {
             DB::table('rumah_sakit')->insert($data);
         }
